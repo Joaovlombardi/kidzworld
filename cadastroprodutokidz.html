@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro do Usuário</title>
+    <title>Cadastro do Produto</title>
 
     <!-- Inclua o CSS do Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -34,15 +34,31 @@
 
 <!-- Formulário de Cadastro de Pessoa com Bootstrap -->
 <div class="container mt-5">
-    <h1>Cadastro do Usuario</h1>
-    <form action="/cadastrousuario" method="post">
+    <h1>Cadastro de Pessoa</h1>
+    <form action="/cadastroprodutokidz" method="post">
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <label for="nome">id_produtokidz:</label>
+            <input type="text" class="form-control" id="id_produtokidz" name="id_produtokidz" placeholder="id_produtokidz">
         </div>
         <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input type="password" class="form-control" id="senha" name="senha" placeholder="senha">
+            <label for="email">Descricçao:</label>
+            <input type="text" class="form-control" id="descricao" name="descricao" placeholder="descricao">
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
+        </div>
+        <div class="form-group">
+            <label for="numero">Marca:</label>
+            <input type="text" class="form-control" id="marca" name="marca" placeholder="marca">
+        </div>
+        <div class="form-group">
+            <label for="cep">Validade:</label>
+            <input type="text" class="form-control" id="validade" name="validade" placeholder="validade">
+        </div>
+        <div class="form-group">
+            <label for="cep">Quantidade:</label>
+            <input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="quantidade">
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>

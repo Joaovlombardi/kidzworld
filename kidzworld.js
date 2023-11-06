@@ -16,7 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/kidzworld',{
 
 //model 1
 const UsuarioSchema = new mongoose.Schema({
-    email : {type : String, require : true},
+    email : {type : String},
     senha : {type : String}
 }) 
 
