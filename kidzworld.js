@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
+
 app.use(bodyParser.json());
 const port = 3000;
 
@@ -35,14 +36,14 @@ app.post("/cadastrousuario", async(req, res)=>{
         return res.status(400).json({error : "O email cadastrado já existe!"})
     }
 
-    const Usuario = new Usuario({
+    const usuario = new Usuario({
         email : email,
         senha : senha,
     })
 
     try{
-        const newUsuario = await Usuario.save();
-        res.json({error : null, msg : "Cadastro ok", pessoaId : newPessoa._id});
+        const newUsuario = await usuario.save();
+        res.json({error : null, msg : "Cadastro ok", usuarioId : newUsuario._id});
     } 
     catch(error){
         res.status(400).json((error))
@@ -51,33 +52,33 @@ app.post("/cadastrousuario", async(req, res)=>{
 
 //model 2
 const produtokidzSchema = new mongoose.Schema({
-    id_produtokidz : {type : String},
+    id_produtokidz : {type : String, required : true},
     descricao : {type : String},
     marca : {type : String},
     validade : {type : Date},
     quantidade : {type : Number}
 }) 
 
-const produtokidz = mongoose.model("produtokidz", produtokidzSchema);
+const Produtokidz = mongoose.model("produtokidz", produtokidzSchema);
 
-app.post("/produtokidz", async(req, res)=>{
+app.post("/cadastroprodutokidz", async(req, res)=>{
     const id_produtokidz = req.body.id_produtokidz;
     const descricao = req.body.descricao;
     const marca = req.body.marca;
     const validade = req.body.validade;
     const quantidade = req.body.quantidade;
 
-    if (email == null || senha == null){
+    if (id_produtokidz == null || descricao == null || marca == null || validade == null || quantidade == null){
         return res.status(400).json({error : "Preencher todos os campos"});
         }
 
-    const emailExiste = await Usuario.findOne({email : email});
+    const idExite = await Produtokidz.findOne({id_produtokidz : id_produtokidz});
 
-    if(emailExiste){
-        return res.status(400).json({error : "O email cadastrado já existe!"})
+    if(idExite){
+        return res.status(400).json({error : "O ID cadastrado já existe!"})
     }
 
-    const produtokidz = new produtokidz({
+    const produtokidz = new Produtokidz({
         id_produtokidz : id_produtokidz,
         descricao : descricao,
         marca : marca,
@@ -87,7 +88,7 @@ app.post("/produtokidz", async(req, res)=>{
 
     try{
         const newprodutokidz = await produtokidz.save();
-        res.json({error : null, msg : "Cadastro ok", pessoaId : newPessoa._id});
+        res.json({error : null, msg : "Cadastro ok", produtokidzId : newprodutokidz._id});
     } 
     catch(error){
         res.status(400).json((error))
@@ -96,6 +97,10 @@ app.post("/produtokidz", async(req, res)=>{
 
 app.get("/cadastrousuario", async (req,res)=>{
     res.sendFile(__dirname + "/cadastrousuario.html")
+})
+
+app.get("/cadastroprodutokidz", async (req,res)=>{
+    res.sendFile(__dirname + "/cadastroprodutokidz.html")
 })
 
 app.get("/", async (req,res)=>{
