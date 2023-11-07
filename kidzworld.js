@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(bodyParser.json());
-const port = 3000;
+const port = 3001;
 
 mongoose.connect('mongodb://127.0.0.1:27017/kidzworld',{
     useNewUrlParser : true,
@@ -78,6 +78,13 @@ app.post("/cadastroprodutokidz", async(req, res)=>{
         return res.status(400).json({error : "O ID cadastrado já existe!"})
     }
 
+    if(quantidade<=0){
+        return res.status(400).json({error : "Insira um valor maior que zero!"})
+    }
+    else if (quantidade >10){
+        return res.status(400).json({error : "Insira um numero menor que 10!"})
+    }
+
     const produtokidz = new Produtokidz({
         id_produtokidz : id_produtokidz,
         descricao : descricao,
@@ -110,4 +117,5 @@ app.get("/", async (req,res)=>{
 app.listen(port, ()=>{
     console.log(`Servidor rodando na porta ${port}`)
 });
+
 
